@@ -7,11 +7,11 @@
             
             <textarea class="form-control" rows="3" id="messageTextBox"></textarea>
             <button id="sendButton" class="btn btn-info" type="button">Send</button>
-
         </div>
         @section scripts
     {
-            @Scripts.Render("~/bundles/jquery.signalR")
+        <script src="~/Scripts/jquery.signalR-2.0.2.js"></script>
+        <script src="~/Scripts/signalR.hub.js"></script>
         }
     </div>
 </div>

@@ -10,7 +10,7 @@
 
     chat.client.addMessage = function (message) {
         // Add the message to the page. 
-        +$('#discussion').append('<li><img data-src="holder.js/200x300" alt="..."></img><strong>User</strong> ' + message + '</li>');
+        +$('#discussion').append('<li><strong>User</strong> ' + message + '</li>');
     }
 
     $.connection.hub.start().done(function () {
