@@ -1,33 +1,16 @@
 ﻿<div class="row">
     <div class="col-md-12">
 
-        <script src="~/Scripts/jquery.signalR-2.0.2.js"></script>
-        <script src="~/signalr/hubs" type="text/javascript"></script>
-
-        <script type="text/javascript">
-            $(function () {
-                var chat = $.connection.chat;
-
-                chat.client.addMessage = function (message) {
-                    // Add the message to the page. 
-                    $('#discussion').append('<li><strong>Test</strong> ' + message + '</li>');
-                }
-
-                $.connection.hub.start().done(function () {
-                    $("#discussion").append("Connected\n");
-                    $("#sendButton").click(function () {
-                        chat.server.send($("#messageTextBox").val());
-                        $("#messageTextBox").val("")
-                    });
-                });
-            });
-        </script>
+        <textarea id="chatWindow" class="form-control" rows="10"></textarea>
         <div>
-            <label>Messages</label>
-            <ul id="discussion" class="list-unstyled"></ul>
+            <label>Message</label>
             <textarea class="form-control" rows="3" id="messageTextBox"></textarea>
             <button id="sendButton" class="btn btn-default" type="button">Send</button>
- 
+
         </div>
+        @section scripts
+    {
+            @Scripts.Render("~/bundles/jquery.signalR")
+        }
     </div>
 </div>
