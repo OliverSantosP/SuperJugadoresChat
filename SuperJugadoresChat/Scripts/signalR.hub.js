@@ -9,11 +9,12 @@
     var chat = $.connection.chat;
 
     chat.client.addMessage = function (message) {
-        $("#chatWindow").val($("#chatWindow").val() + message + "\n");
+        // Add the message to the page. 
+        +$('#discussion').append('<li><strong>Test</strong> ' + message + '</li>');
     }
 
     $.connection.hub.start().done(function () {
-        $("#chatWindow").val("Connected\n");
+        $("#discussion").append("Connected\n");
         $("#sendButton").click(function () {
             chat.server.send($("#messageTextBox").val());
             $("#messageTextBox").val("")
