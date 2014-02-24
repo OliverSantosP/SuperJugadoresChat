@@ -9,7 +9,10 @@
     var chat = $.connection.chat;
 
     chat.client.addMessage = function (message) {
-        if (message!='') {
+
+        //Verify the message is not empty.
+        if (message != '') {
+            //Get the message Datetime.
             var now = new Date();
             var strDateTime = [[AddZero(now.getDate()), AddZero(now.getMonth() + 1), now.getFullYear()].join("/"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":"), now.getHours() >= 12 ? "PM" : "AM"].join(" ");
 
@@ -18,10 +21,31 @@
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
             // Add the message to the page. 
-            +$('#discussion').append('<li><strong>User</strong> ' + message + '<i> ' + strDateTime + '</i></li>');
+            $('#discussion').append('<li><strong>User</strong> ' + message + '<i> ' + strDateTime + '</i></li>');
         }
         
     }
+
+    $(document).on('dragover', function (e) { e.preventDefault(); return false; });
+    
+    $(document).on('drop', function (e) {
+        e.preventDefault();
+        e.originalEvent.dataTransfer.items[0].getAsString(function (url) {
+
+            //Get the message Datetime.
+            var now = new Date();
+            var strDateTime = [[AddZero(now.getDate()), AddZero(now.getMonth() + 1), now.getFullYear()].join("/"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":"), now.getHours() >= 12 ? "PM" : "AM"].join(" ");
+
+            //Pad given value to the left with "0"
+            function AddZero(num) {
+                return (num >= 0 && num < 10) ? "0" + num : num + "";
+            }
+
+
+            alert(url);
+            $('#discussion').append('<li><img src="' + url + '" />' + strDateTime + '</li>');
+        });
+    });
 
     $.connection.hub.start().done(function () {
         $("#discussion").append("Connected\n");
