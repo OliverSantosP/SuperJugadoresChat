@@ -21,7 +21,7 @@
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
             // Add the message to the page. 
-            $('#discussion').append('<li><strong>User</strong> ' + message + '<i> ' + strDateTime + '</i></li>');
+            $('#discussion').append('<div class="row"><strong>User</strong> ' + message + '<small><i> ' + strDateTime + '</i></small></div>');
         }
         
     }
@@ -43,7 +43,7 @@
 
 
             alert(url);
-            $('#discussion').append('<li><img src="' + url + '" />' + strDateTime + '</li>');
+            $('#discussion').append('<div class="row"><small><i><img src="' + url + '" />' + strDateTime + '</i></small></div>');
         });
     });
 
