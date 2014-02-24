@@ -15,7 +15,7 @@ namespace SuperJugadoresChat
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery.signalR").Include(
-                        "~/Scripts/jquery.signalR-{version}.js",
+                        "~/Scripts/jquery.signalR-*",
                         "~/Scripts/signalR.hub.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
