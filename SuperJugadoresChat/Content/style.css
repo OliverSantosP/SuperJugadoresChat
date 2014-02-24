@@ -1020,6 +1020,7 @@ form label{
 	border-left: 1px solid #ddd;
 	border-right:1px solid #ddd;
 	border-bottom: 1px solid #ddd;
+    padding-left: 15px;
 }
 
 .widget .widget-foot{
