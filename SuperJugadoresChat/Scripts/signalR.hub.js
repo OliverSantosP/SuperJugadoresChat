@@ -6,6 +6,9 @@
         cache: true
     });
 
+    // Get the user name and store it to prepend to messages.
+    $('#userName').text(prompt('Enter your name:', ''));
+
     var chat = $.connection.chat;
 
     chat.client.addMessage = function (message) {
@@ -21,7 +24,7 @@
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
             // Add the message to the page. 
-            $('.padd').append('<div class="row"><strong>User</strong> ' + message + '<small><i> ' + strDateTime + '</i></small></div>');
+            $('.padd').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>' + ('#userName').text() + '</strong> ' + message + '<small><br /><i> ' + strDateTime + '</i></small></div></div></li>');
         }
 
     }
@@ -40,7 +43,7 @@
             function AddZero(num) {
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
-            $('.row , .padd').append('<div class="row"><small><i><img src="' + url + '" />' + strDateTime + '</i></small></div>');
+            $('.padd').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>User</strong>'+ url + '<br /><i>' + strDateTime + '</i></small></div></div></li>');
         });
     });
 
@@ -51,5 +54,15 @@
             $("#messageTextBox").val("")
         });
     });
+
+
+    $(document.body).delegate('input:text', 'keypress', function (e) {
+        if (e.which === 13) { // if is enter
+            e.preventDefault(); // don't submit form
+            chat.server.send($("#messageTextBox").val());
+            $("#messageTextBox").val("")
+        }
+    });
+
 
 }(jQuery));
