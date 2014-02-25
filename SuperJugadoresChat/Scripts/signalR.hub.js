@@ -21,13 +21,13 @@
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
             // Add the message to the page. 
-            $('#discussion').append('<div class="row"><strong>User</strong> ' + message + '<small><i> ' + strDateTime + '</i></small></div>');
+            $('.padd').append('<div class="row"><strong>User</strong> ' + message + '<small><i> ' + strDateTime + '</i></small></div>');
         }
-        
+
     }
 
     $(document).on('dragover', function (e) { e.preventDefault(); return false; });
-    
+
     $(document).on('drop', function (e) {
         e.preventDefault();
         e.originalEvent.dataTransfer.items[0].getAsString(function (url) {
@@ -40,16 +40,13 @@
             function AddZero(num) {
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
-
-
-            alert(url);
-            $('#discussion').append('<div class="row"><small><i><img src="' + url + '" />' + strDateTime + '</i></small></div>');
+            $('.row , .padd').append('<div class="row"><small><i><img src="' + url + '" />' + strDateTime + '</i></small></div>');
         });
     });
 
     $.connection.hub.start().done(function () {
-        $("#discussion").append("Connected\n");
-        $("#sendButton").click(function () {
+        $(".padd").append("Connected\n");
+        $(".row #sendButton").click(function () {
             chat.server.send($("#messageTextBox").val());
             $("#messageTextBox").val("")
         });
