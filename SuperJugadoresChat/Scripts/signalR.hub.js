@@ -43,7 +43,7 @@
             function AddZero(num) {
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
-            $('.padd').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>User</strong>'+ url + '<br /><i>' + strDateTime + '</i></small></div></div></li>');
+            $('.padd').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>'+userName+'</strong>'+ url + '<br /><i>' + strDateTime + '</i></small></div></div></li>');
         });
     });
 
