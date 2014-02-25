@@ -7,7 +7,7 @@
     });
 
     // Get the user name and store it to prepend to messages.
-    $('#userName').text(prompt('Enter your name:', ''));
+    var userName = prompt("Enter your user name:");
 
     var chat = $.connection.chat;
 
@@ -24,7 +24,7 @@
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
             // Add the message to the page. 
-            $('.padd').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>' + ('#userName').text() + '</strong> ' + message + '<small><br /><i> ' + strDateTime + '</i></small></div></div></li>');
+            $('.padd').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>' + userName + '</strong> ' + message + '<small><br /><i> ' + strDateTime + '</i></small></div></div></li>');
         }
 
     }
