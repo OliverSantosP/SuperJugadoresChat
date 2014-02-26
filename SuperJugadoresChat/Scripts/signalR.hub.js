@@ -139,8 +139,8 @@
           default_options = {
               callback: function (text, href) {
                   //If the text is a image
-                  if (text.indexOf(".jpg") != -1 || text.indexOf(".gif") != -1) {
-                      return href ? '<img src="' + href + '" /></a>' : text;
+                  if (text.indexOf(".jpg") != -1 || text.indexOf(".gif") != -1 || text.indexOf(".png") != -1 || text.indexOf(".bmp") != -1) {
+                      return href ? '<img src="' + href + '" class="img-responsive" /></a>' : text;
                   }
                   else {
                       return href ? '<a href="' + href + '" title="' + href + '">' + text + '</a>' : text;
