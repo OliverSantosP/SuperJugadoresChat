@@ -10,7 +10,7 @@
 
     // Get the user name and store it to prepend to messages.
     var userName = prompt("Enter your user name:");
-
+    $("#messageTextBox").focus();
     var chat = $.connection.chat;
 
     chat.client.addMessage = function (message) {
@@ -52,12 +52,12 @@
             function AddZero(num) {
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
-            $('.padd').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>' + userName + '</strong><img src="' + url.getAttribute("src") + '" /><br /><i>' + strDateTime + '</i></small></div></div></li>');
+            $('ul.chats').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>' + userName + '</strong><img src="' + url.getAttribute("src") + '" /><br /><i>' + strDateTime + '</i></small></div></div></li>');
         });
     });
 
     $.connection.hub.start().done(function () {
-        $(".padd").append("Connected\n");
+        $('ul.chats').append('SuperJugador conectado\n');
         $(".row #sendButton").click(function () {
             chat.server.send($("#messageTextBox").val());
             $("#messageTextBox").val("")
