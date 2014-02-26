@@ -1,6 +1,7 @@
 ﻿
 
 (function ($) {
+
     $.ajax({
         url: "/signalr/hubs",
         dataType: "script",
@@ -8,10 +9,12 @@
         cache: true
     });
 
+    var chat = $.connection.chat;
+
     // Get the user name and store it to prepend to messages.
     var userName = prompt("Enter your user name:");
     $("#messageTextBox").focus();
-    var chat = $.connection.chat;
+
 
     chat.client.addMessage = function (message) {
 
@@ -33,6 +36,8 @@
 
             // Add the message to the page. 
             $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">'+userName+'<span class="pull-right">'+strDateTime+'</span></div>'+message+'<div class="clearfix"></div></div>');
+            var d = $('.widget-content-chat');
+            d.scrollTop(d.prop("scrollHeight"));
         }
 
     }
@@ -53,11 +58,12 @@
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
             $('ul.chats').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>' + userName + '</strong><img src="' + url.getAttribute("src") + '" /><br /><i>' + strDateTime + '</i></small></div></div></li>');
+
         });
     });
 
     $.connection.hub.start().done(function () {
-        $('ul.chats').append('SuperJugador conectado\n');
+        $('ul.chats').append('SuperJugador conectado!\n\n');
         $(".row #sendButton").click(function () {
             chat.server.send($("#messageTextBox").val());
             $("#messageTextBox").val("")
