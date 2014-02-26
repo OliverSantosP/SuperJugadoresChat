@@ -9,7 +9,6 @@ namespace SuperJugadoresChat
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR();
-
         }
     }
 }

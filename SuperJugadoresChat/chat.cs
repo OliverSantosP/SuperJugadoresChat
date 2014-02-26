@@ -4,9 +4,10 @@ namespace SuperJugadoresChat
 {
     public class Chat : Hub
     {
-        public void Send(string message)
+        public void Send(string username, string message)
         {
-            Clients.All.AddMessage(message);
+            // Call the 'addNewMessageToPage' method to update clients.
+            Clients.All.addNewMessageToPage(username, message);
         }
     }
 }

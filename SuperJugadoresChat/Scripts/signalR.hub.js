@@ -16,6 +16,7 @@
     $("#messageTextBox").focus();
 
     function getDateTime() {
+
         //Get the message Datetime.
         var now = new Date();
         var strDateTime = [[AddZero(now.getDate()), AddZero(now.getMonth() + 1), now.getFullYear()].join("/"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":"), now.getHours() >= 12 ? "PM" : "AM"].join(" ");
@@ -28,22 +29,31 @@
         return strDateTime;
     }
 
-    chat.client.addMessage = function (message, username) {
-
-        username = userName;
-        //Verify the message is not empty.
+    // Create a function that the hub can call back to display messages.
+    chat.client.addNewMessageToPage = function (name, message) {
+        // Add the user message to the page. 
+            //Verify the message is not empty.
         if (message != '') {
 
             message = window.linkify(message);
 
-            
-            // Add the message to the page. 
-            $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">'+username+'<span class="pull-right">'+getDateTime()+'</span></div>'+message+'<div class="clearfix"></div></div>');
-            var d = $('.widget-content-chat');
-            d.scrollTop(d.prop("scrollHeight"));
-        }
+                if (name==userName) {
+                    // Add the message to the page. 
+                    $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
+                    var d = $('.widget-content-chat');
+                    d.scrollTop(d.prop("scrollHeight"));
+                }
+                else {
+                    // Add the message to the page. 
+                    $('ul.chats').append('<li class="by-other"><div class="avatar pull-right"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
+                    var d = $('.widget-content-chat');
+                    d.scrollTop(d.prop("scrollHeight"));
+                }
 
-    }
+                
+            }
+    };
+
 
     $(document).on('dragover', function (e) { e.preventDefault(); return false; });
 
@@ -61,7 +71,7 @@
     $.connection.hub.start().done(function () {
         $('ul.chats').append('SuperJugador conectado!\n\n');
         $(".row #sendButton").click(function () {
-            chat.server.send($("#messageTextBox").val());
+            chat.server.send(userName,$("#messageTextBox").val());
             $("#messageTextBox").val("")
         });
     });
@@ -70,7 +80,7 @@
     $(document.body).delegate('input:text', 'keypress', function (e) {
         if (e.which === 13) { // if is enter
             e.preventDefault(); // don't submit form
-            chat.server.send($("#messageTextBox").val());
+            chat.server.send(userName,$("#messageTextBox").val());
             $("#messageTextBox").val("")
         }
     });
