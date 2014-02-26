@@ -15,27 +15,30 @@
     var userName = prompt("Enter your user name:");
     $("#messageTextBox").focus();
 
+    function getDateTime() {
+        //Get the message Datetime.
+        var now = new Date();
+        var strDateTime = [[AddZero(now.getDate()), AddZero(now.getMonth() + 1), now.getFullYear()].join("/"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":"), now.getHours() >= 12 ? "PM" : "AM"].join(" ");
 
-    chat.client.addMessage = function (message) {
+        //Pad given value to the left with "0"
+        function AddZero(num) {
+            return (num >= 0 && num < 10) ? "0" + num : num + "";
+        }
 
+        return strDateTime;
+    }
+
+    chat.client.addMessage = function (message, username) {
+
+        username = userName;
         //Verify the message is not empty.
         if (message != '') {
 
             message = window.linkify(message);
 
-            //Get the message Datetime.
-            var now = new Date();
-            var strDateTime = [[AddZero(now.getDate()), AddZero(now.getMonth() + 1), now.getFullYear()].join("/"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":"), now.getHours() >= 12 ? "PM" : "AM"].join(" ");
             
-            //Pad given value to the left with "0"
-            function AddZero(num) {
-                return (num >= 0 && num < 10) ? "0" + num : num + "";
-            }
-
-
-
             // Add the message to the page. 
-            $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">'+userName+'<span class="pull-right">'+strDateTime+'</span></div>'+message+'<div class="clearfix"></div></div>');
+            $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">'+username+'<span class="pull-right">'+getDateTime()+'</span></div>'+message+'<div class="clearfix"></div></div>');
             var d = $('.widget-content-chat');
             d.scrollTop(d.prop("scrollHeight"));
         }
@@ -47,18 +50,11 @@
     $(document).on('drop', function (e) {
         e.preventDefault();
         e.originalEvent.dataTransfer.items[0].getAsString(function (url) {
-            
 
-            //Get the message Datetime.
-            var now = new Date();
-            var strDateTime = [[AddZero(now.getDate()), AddZero(now.getMonth() + 1), now.getFullYear()].join("/"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":"), now.getHours() >= 12 ? "PM" : "AM"].join(" ");
+            $('ul.chats').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>' + userName + '</strong><img src="' + url.getAttribute("src") + '" /><br /><i>' + getDateTime() + '</i></small></div></div></li>');
+            var d = $('.widget-content-chat');
 
-            //Pad given value to the left with "0"
-            function AddZero(num) {
-                return (num >= 0 && num < 10) ? "0" + num : num + "";
-            }
-            $('ul.chats').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>' + userName + '</strong><img src="' + url.getAttribute("src") + '" /><br /><i>' + strDateTime + '</i></small></div></div></li>');
-
+            d.scrollTop(d.prop("scrollHeight"));
         });
     });
 
