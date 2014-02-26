@@ -11,6 +11,28 @@
 
     var chat = $.connection.chat;
 
+    chat.loadUsers = function (data) { loadUsers(data); };
+    var connectedUserCount = 0;
+
+    var usr = $.connection.usersOnLine;
+    $.connection.hub.start().done(function () {
+        console.log("Connection");
+    });
+    usr.client.log = function (message) {
+        //log event 
+        console.log("Message " + message);
+    };
+    usr.client.showUsersOnLine = function (data) {
+        //showUsersOnLine event
+        if (data=="1") {
+            $("div#label").text(data + " SuperJugador online");
+        }
+        else {
+            $("div#label").text(data + " SuperJugadores online");
+        }
+        
+    };
+
     // Get the user name and store it to prepend to messages.
     var userName = prompt("Enter your user name:");
     $("#messageTextBox").focus();
@@ -32,6 +54,7 @@
     // Create a function that the hub can call back to display messages.
     chat.client.addNewMessageToPage = function (name, message) {
         // Add the user message to the page. 
+
             //Verify the message is not empty.
         if (message != '') {
 
