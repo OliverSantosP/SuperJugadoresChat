@@ -22,7 +22,7 @@
         //log event 
         console.log("Message " + message);
     };
-    usr.client.showUsersOnLine2 = function (data) {
+    usr.client.showUsersOnLine = function (data) {
         //showUsersOnLine event
         if (data == "1") {
             $("div#label").text(data + " SuperJugador online");
