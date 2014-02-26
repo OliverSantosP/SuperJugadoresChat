@@ -30,8 +30,9 @@
             }
 
 
+
             // Add the message to the page. 
-            $('.padd').append('<div class="row"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" /><div class="chat-content"><strong>' + userName + '</strong> ' + message + '<small><br /><i> ' + strDateTime + '</i></small></div></div></li>');
+            $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">'+userName+'<span class="pull-right">'+strDateTime+'</span></div>'+message+'<div class="clearfix"></div></div>');
         }
 
     }
