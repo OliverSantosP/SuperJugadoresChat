@@ -22,19 +22,24 @@
         //log event 
         console.log("Message " + message);
     };
-    usr.client.showUsersOnLine = function (data) {
+    usr.client.showUsersOnLine2 = function (data) {
         //showUsersOnLine event
-        if (data=="1") {
+        if (data == "1") {
             $("div#label").text(data + " SuperJugador online");
         }
         else {
             $("div#label").text(data + " SuperJugadores online");
         }
-        
+
+    };
+
+    usr.client.OnDisconnected = function (data) {
+        console.log("Disconnected " + data);
+        //showUsersOnLine event 
     };
 
     // Get the user name and store it to prepend to messages.
-    var userName = prompt("Enter your user name:");
+    var userName = prompt("Elige tu nombre de usuario para chatear:");
     $("#messageTextBox").focus();
 
     function getDateTime() {
@@ -55,26 +60,26 @@
     chat.client.addNewMessageToPage = function (name, message) {
         // Add the user message to the page. 
 
-            //Verify the message is not empty.
+        //Verify the message is not empty.
         if (message != '') {
 
             message = window.linkify(message);
 
-                if (name==userName) {
-                    // Add the message to the page. 
-                    $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
-                    var d = $('.widget-content-chat');
-                    d.scrollTop(d.prop("scrollHeight"));
-                }
-                else {
-                    // Add the message to the page. 
-                    $('ul.chats').append('<li class="by-other"><div class="avatar pull-right"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
-                    var d = $('.widget-content-chat');
-                    d.scrollTop(d.prop("scrollHeight"));
-                }
-
-                
+            if (name == userName) {
+                // Add the message to the page. 
+                $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
+                var d = $('.widget-content-chat');
+                d.scrollTop(d.prop("scrollHeight"));
             }
+            else {
+                // Add the message to the page. 
+                $('ul.chats').append('<li class="by-other"><div class="avatar pull-right"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
+                var d = $('.widget-content-chat');
+                d.scrollTop(d.prop("scrollHeight"));
+            }
+
+
+        }
     };
 
 
@@ -94,7 +99,7 @@
     $.connection.hub.start().done(function () {
         $('ul.chats').append('SuperJugador conectado!\n\n');
         $(".row #sendButton").click(function () {
-            chat.server.send(userName,$("#messageTextBox").val());
+            chat.server.send(userName, $("#messageTextBox").val());
             $("#messageTextBox").val("")
         });
     });
@@ -103,7 +108,7 @@
     $(document.body).delegate('input:text', 'keypress', function (e) {
         if (e.which === 13) { // if is enter
             e.preventDefault(); // don't submit form
-            chat.server.send(userName,$("#messageTextBox").val());
+            chat.server.send(userName, $("#messageTextBox").val());
             $("#messageTextBox").val("")
         }
     });
@@ -145,7 +150,7 @@
                   else {
                       return href ? '<a href="' + href + '" title="' + href + '">' + text + '</a>' : text;
                   }
-                  
+
               },
               punct_regexp: /(?:[!?.,:;'"]|(?:&|&amp;)(?:lt|gt|quot|apos|raquo|laquo|rsaquo|lsaquo);)$/
           };
