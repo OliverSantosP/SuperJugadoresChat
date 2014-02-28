@@ -99,7 +99,28 @@
             $("ul#user-details").append("<li>" + allUsers[i].UserName + "</li>");
         }
 
+    }
 
+    // On New User Connected
+    chat.client.onNewUserConnected = function (id, name) {
+
+        AddUser(chat, id, name);
+    }
+
+    // On User Disconnected
+    chat.client.onUserDisconnected = function (id, userName) {
+
+        $('#' + id).remove();
+
+        var ctrId = 'private_' + id;
+        $('#' + ctrId).remove();
+
+
+        var disc = $('<div class="disconnect">"' + userName + '" logged off.</div>');
+
+        $(disc).hide();
+        $('div#users-online').append(disc);
+        chat.server.send("Robotina", userName + " se ha desconectado.");
     }
 
     window.linkify = (function () {
