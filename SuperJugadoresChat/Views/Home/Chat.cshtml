@@ -1,22 +1,20 @@
 ﻿
 <script src="~/Scripts/ba-linkify.js"></script>
 
-<div class="row">
 
-    <!-- Chats widget -->
-    <div class="col-md-12">
-        <!-- Widget -->
-        <div class="widget wlightblue">
-            <!-- Widget title -->
-            <div class="widget-head">
-                <div class="pull-left">SuperJugadores Chat</div>
-                <div class="widget-icons pull-right">
-                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
-                    <a href="#" class="wclose"><i class="icon-remove"></i></a>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-
+<!-- Widget -->
+<div class="widget wlightblue">
+    <!-- Widget title -->
+    <div class="widget-head">
+        <div class="pull-left">SuperJugadores Chat</div>
+        <div class="widget-icons pull-right">
+            <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+            <a href="#" class="wclose"><i class="icon-remove"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
             <div class="widget-content-chat">
                 <!-- Widget content -->
                 <div class="padd">
@@ -25,26 +23,32 @@
 
                 </div>
             </div>
-
-
-            <!-- Widget footer -->
-            <div class="widget-foot">
-                <div class="text-info" id="label">
-                    User count.
-                    </div>
-                    <!-- Chat input box -->
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="messageTextBox">
-                    </div>
-                    <button type="submit" class="btn btn-info" id="sendButton">Send</button>
-
-
+        </div>
+        <div class="col-lg-2">
+            <div class="widget-content-users">
+                <div id="users-online">
+                    <ul class="list-unstyled" id="user-details"></ul>
                 </div>
-
+            </div>
         </div>
     </div>
+
+
+    <!-- Widget footer -->
+    <div class="widget-foot">
+        <div class="text-info" id="label">
+            User count.
+        </div>
+        <!-- Chat input box -->
+        <div class="form-group">
+            <input type="text" class="form-control" id="messageTextBox">
+        </div>
+        <button type="submit" class="btn btn-info" id="sendButton">Send</button>
+
+
     </div>
-    @section scripts{
-        <script src="~/Scripts/jquery.signalR-2.0.2.js"></script>
-        <script src="~/Scripts/signalR.hub.js"></script>
-    }
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.0.2.js"></script>
+    <script src="~/Scripts/signalR.hub.js"></script>
+}

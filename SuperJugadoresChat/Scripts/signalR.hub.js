@@ -11,36 +11,10 @@
 
     var chat = $.connection.chat;
 
-    chat.loadUsers = function (data) { loadUsers(data); };
-    var connectedUserCount = 0;
-
-    var usr = $.connection.usersOnLine;
-    $.connection.hub.start().done(function () {
-        console.log("Connection");
-    });
-    usr.client.log = function (message) {
-        //log event 
-        console.log("Message " + message);
-    };
-    usr.client.showUsersOnLine = function (data) {
-        //showUsersOnLine event
-        if (data == "1") {
-            $("div#label").text(data + " SuperJugador online");
-        }
-        else {
-            $("div#label").text(data + " SuperJugadores online");
-        }
-
-    };
-
-    usr.client.OnDisconnected = function (data) {
-        console.log("Disconnected " + data);
-        //showUsersOnLine event 
-    };
-
     // Get the user name and store it to prepend to messages.
     var userName = prompt("Elige tu nombre de usuario para chatear:");
     $("#messageTextBox").focus();
+
 
     function getDateTime() {
 
@@ -98,11 +72,13 @@
 
     $.connection.hub.start().done(function () {
         $('ul.chats').append('SuperJugador conectado!\n\n');
+        chat.server.connect(userName);
         $(".row #sendButton").click(function () {
             chat.server.send(userName, $("#messageTextBox").val());
             $("#messageTextBox").val("")
         });
     });
+
 
 
     $(document.body).delegate('input:text', 'keypress', function (e) {
@@ -112,6 +88,19 @@
             $("#messageTextBox").val("")
         }
     });
+
+
+    // Calls when user successfully logged in
+    chat.client.onConnected = function (allUsers) {
+        $("ul#user-details").text = '';
+        // Add All Users
+        for (i = 0; i < allUsers.length; i++) {
+
+            $("ul#user-details").append("<li>" + allUsers[i].UserName + "</li>");
+        }
+
+
+    }
 
     window.linkify = (function () {
         var
