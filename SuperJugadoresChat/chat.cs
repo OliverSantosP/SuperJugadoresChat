@@ -19,6 +19,7 @@ namespace SuperJugadoresChat
             public override System.Threading.Tasks.Task OnConnected()
             {
                 string clientId = GetClientId();
+                string Name = GetClientId();
 
                 if (users.IndexOf(clientId) == -1)
                 {
@@ -71,6 +72,7 @@ namespace SuperJugadoresChat
                 {
                     //default clientId: connectionId 
                     clientId = Context.ConnectionId;
+                    
                 }
                 return clientId;
 

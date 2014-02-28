@@ -1030,7 +1030,7 @@ form label{
 	border-bottom: 1px solid #ddd;
     padding-left: 15px;
     height: 350px;
-    overflow-y:scroll;
+    overflow-y:auto;
 }
 
 .widget .widget-foot{
