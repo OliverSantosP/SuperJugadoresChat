@@ -9,5 +9,7 @@ namespace SuperJugadoresChat.Models
     {
         public string ConnectionId { get; set; }
         public string UserName { get; set; }
+        public string SJId { get; set; }
+        public string Img { get; set; }
     }
 }

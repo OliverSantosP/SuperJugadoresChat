@@ -15,16 +15,20 @@ namespace SuperJugadoresChat
         {
             var id = Context.ConnectionId;
 
+            var img = "user.jpg";
+
+            var sjid = "0";
+
             if (ConnectedUsers.Count(x => x.ConnectionId == id) == 0)
             {
-                ConnectedUsers.Add(new UserDetail { ConnectionId = id, UserName = userName });
+                ConnectedUsers.Add(new UserDetail { ConnectionId = id, UserName = userName, Img = img , SJId = sjid });
             }
 
             // send to caller
             Clients.Caller.onConnected(ConnectedUsers, CurrentMessage);
 
             // send to all except caller client
-            Clients.AllExcept(id).onNewUserConnected(id, userName);
+            Clients.AllExcept(id).onNewUserConnected(id, userName, img, sjid);
         }
 
 

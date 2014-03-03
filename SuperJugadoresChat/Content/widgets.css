@@ -332,6 +332,10 @@
 	margin-top: 10px;
 }
 
+.user .user-row{
+    background-color: black;
+}
+
 .user .user-pic{
 	float: left;
 	width: 80px;

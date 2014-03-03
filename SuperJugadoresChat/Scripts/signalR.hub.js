@@ -102,9 +102,10 @@
 
         // Add all Users.
         for (i = 0; i < allUsers.length; i++) {
+            $("ul#user-details").append('<li><div class="widgets user-row"><img src="/Content/' + allUsers[i].Img + '"/><a id="' + allUsers[i].ConnectionId + '" sjid="' + allUsers[i].SJId + '">' + allUsers[i].UserName + '</a></li>');
 
-            $("ul#user-details").append("<li>" + allUsers[i].UserName + "</li>");
         }
+
 
         // Add last 20 messages.
         for (j = 0; j < allMessages.length; j++) {
@@ -118,14 +119,14 @@
     }
 
     // On New User Connected
-    chat.client.onNewUserConnected = function (id, name) {
+    chat.client.onNewUserConnected = function (id, name, img, sjid) {
 
-        AddUser(chat, id, name);
+        AddUser(id, name, img, sjid);
     }
 
-    function AddUser(chatHub, id, name) 
+    function AddUser(id, name, img, sjid) 
     {
-        $("ul#user-details").append("<li>" + name + "</li>");
+        $("ul#user-details").append('<li><div class="avatar pull-left"><img src="/Content/' + img + '" alt="" /><a id="' + id + '" sjid="' + sjid + '">' + name + '</a></li>');
     }
 
     // On User Disconnected
