@@ -34,6 +34,12 @@
     chat.client.addNewMessageToPage = function (name, message) {
         // Add the user message to the page. 
 
+        var userImage = "user.jpg"
+
+        if (name=="Robotina") {
+            userImage = "robotina.jpg"
+        }
+
         //Verify the message is not empty.
         if (message != '') {
 
@@ -41,13 +47,13 @@
 
             if (name == userName) {
                 // Add the message to the page. 
-                $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
+                $('ul.chats').append('<li class="by-me"><div class="avatar pull-left"><img src="/Content/' + userImage + '" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
                 var d = $('.widget-content-chat');
                 d.scrollTop(d.prop("scrollHeight"));
             }
             else {
                 // Add the message to the page. 
-                $('ul.chats').append('<li class="by-other"><div class="avatar pull-right"><img src="/Content/user.jpg" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
+                $('ul.chats').append('<li class="by-other"><div class="avatar pull-right"><img src="/Content/' + userImage + '" alt="" class="img-responsive"></div><div class="chat-content"><div class="chat-meta">' + name + '<span class="pull-right">' + getDateTime() + '</span></div>' + message + '<div class="clearfix"></div></div>');
                 var d = $('.widget-content-chat');
                 d.scrollTop(d.prop("scrollHeight"));
             }
@@ -115,6 +121,11 @@
     chat.client.onNewUserConnected = function (id, name) {
 
         AddUser(chat, id, name);
+    }
+
+    function AddUser(chatHub, id, name) 
+    {
+        $("ul#user-details").append("<li>" + name + "</li>");
     }
 
     // On User Disconnected
