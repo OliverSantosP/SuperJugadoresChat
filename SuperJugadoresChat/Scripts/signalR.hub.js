@@ -102,7 +102,7 @@
 
         // Add all Users.
         for (i = 0; i < allUsers.length; i++) {
-            $("ul#user-details").append('<li><div class="widgets user-row"><img src="/Content/' + allUsers[i].Img + '"/><a id="' + allUsers[i].ConnectionId + '" sjid="' + allUsers[i].SJId + '">' + allUsers[i].UserName + '</a></li>');
+            $("ul#user-details").append('<li><div class="user-row"><img src="/Content/' + allUsers[i].Img + '"/><a id="' + allUsers[i].ConnectionId + '" sjid="' + allUsers[i].SJId + '">' + allUsers[i].UserName + '</a></li>');
 
         }
 

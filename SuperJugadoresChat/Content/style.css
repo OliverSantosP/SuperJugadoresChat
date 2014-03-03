@@ -8,6 +8,10 @@
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-weight: 400;
 }
+.user-row{
+    background-color: #F9F9F9;
+}
+
 
 .navbar * {
     background-image: none !important;
@@ -1032,6 +1036,8 @@ form {
         height: 350px;
         overflow-y: auto;
     }
+
+
 
     .widget .widget-content-users {
         border-right: 1px solid #ddd;
