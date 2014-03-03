@@ -122,6 +122,8 @@
     chat.client.onNewUserConnected = function (id, name, img, sjid) {
 
         AddUser(id, name, img, sjid);
+
+        chat.server.send("Robotina", name + " se ha conectado.");
     }
 
     function AddUser(id, name, img, sjid) 
