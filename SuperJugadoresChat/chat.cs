@@ -21,7 +21,7 @@ namespace SuperJugadoresChat
             }
 
             // send to caller
-            Clients.Caller.onConnected(ConnectedUsers);
+            Clients.Caller.onConnected(ConnectedUsers, CurrentMessage);
 
             // send to all except caller client
             Clients.AllExcept(id).onNewUserConnected(id, userName);
@@ -54,9 +54,10 @@ namespace SuperJugadoresChat
 
         private void AddMessageinCache(string userName, string message)
         {
-            CurrentMessage.Add(new Messages { UserName = userName, Message = message});
+            
+            CurrentMessage.Add(new Messages { UserName = userName, Message = message, Datetime = System.DateTime.Now });
 
-            if (CurrentMessage.Count > 100)
+            if (CurrentMessage.Count > 20)
                 CurrentMessage.RemoveAt(0);
         }
         
