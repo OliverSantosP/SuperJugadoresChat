@@ -19,7 +19,7 @@ namespace SuperJugadoresChat
 
             var sjid = "0";
 
-            if (ConnectedUsers.Count(x => x.ConnectionId == id) == 0)
+            if (ConnectedUsers.Any(x => x.ConnectionId == id))
             {
                 ConnectedUsers.Add(new UserDetail { ConnectionId = id, UserName = userName, Img = img , SJId = sjid });
             }
